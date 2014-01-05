@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- 
 
 """
-Django models for blog project diary application
+Django models for bookshelf project blog application
 """
 
 from django.db import models

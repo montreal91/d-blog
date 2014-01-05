@@ -1,6 +1,9 @@
-{% load humanize %}
-Today the {{ moment|date:"j"|ordinal }} {{ moment|date:"F Y"}}, {{ moment|date:"l" }} <br>
-The {{ moment|date:"z"|ordinal }} day of the year.
+{% extends "main/base.html" %}
+
+{% block title %}N.A.Y.:Blog{% endblock %}
+
+{% block content %}
+
 {% if post_list %}
 	<ul>
 	{% for post in post_list %}
@@ -10,3 +13,5 @@ The {{ moment|date:"z"|ordinal }} day of the year.
 {% else %}
 	<p>No posts are avaiable.</p>
 {% endif %}
+
+{% endblock %}

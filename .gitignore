@@ -1,3 +1,5 @@
 *.pyc
 bookshelf/settings.py
 favicon.png
+main/static/main/bootstrap/
+main/static/main/fontawesome/

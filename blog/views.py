@@ -7,6 +7,8 @@ from django.views import generic
 
 from models import Post
 
+moment = timezone.now()
+
 class BlogView(generic.ListView):
 	template_name = 'blog/index.html'
 	context_object_name = 'post_list'
@@ -16,9 +18,14 @@ class BlogView(generic.ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super(BlogView, self).get_context_data(**kwargs)
-		context['moment'] = timezone.now()
+		context['moment'] = moment
 		return context
 
 class PostView(generic.DetailView):
 	model = Post
 	template_name = 'blog/post.html' 
+
+#	def get_context_data(self, **kwargs):
+#		context = super(BlogView, self).get_context_data(**kwargs)
+#		context['moment'] = moment
+#		return context
