@@ -1,4 +1,6 @@
-Today {{today}}
+{% load humanize %}
+Today the {{ moment|date:"j"|ordinal }} {{ moment|date:"F Y"}}, {{ moment|date:"l" }} <br>
+The {{ moment|date:"z"|ordinal }} day of the year.
 {% if post_list %}
 	<ul>
 	{% for post in post_list %}
