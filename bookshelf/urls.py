@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'bookshelf.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^shelf/', include('diary.urls')),
-    url(r'^blog/', include('blog.urls')),
+    url(r'^shelf/', include('diary.urls', namespace='shelf')),
+    url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'^admin/', include(admin.site.urls)),
 )

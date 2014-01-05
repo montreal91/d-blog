@@ -21,4 +21,4 @@ class Comment(models.Model):
 	date = models.DateField(auto_now_add=True)
 
 	def __unicode__(self):
-		return self.post + ' ' + self.author + ' ' + self.text[:99]
+		return self.post.__unicode__() + ' ' + self.author + ' ' + self.text[:99]
