@@ -4,3 +4,4 @@ favicon.png
 main/static/main/bootstrap/
 main/static/main/fontawesome/
 main/static/main/jquery-1.10.2.js
+blog/forms.py

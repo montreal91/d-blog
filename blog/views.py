@@ -1,12 +1,32 @@
 # -*- coding: utf-8 -*- 
+import json
 
 from django.utils import timezone
+from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView, CreateView
+from django.views.generic.edit import CreateView
 
 from models import Post
 
-class BlogView(CreateView):
+class AjaxResponseMixin(object):
+	"""
+	Mixin to add AJAX support to a form.
+	"""
+
+	def render_to_json_response(self, context, **response_kwargs):
+		data = json.dumps(context)
+		response_kwargs['content-type'] = 'application/json'
+		return HttpResponse(data, **response_kwargs)
+
+	def form_invalid(self, form):
+		response = super(AjaxResponseMixin, self).form_invalid(form)
+
+		if self.request.is_ajax():
+			return self.render_to_json_response(form.errors, status=400)
+		else:
+			return response
+
+class BlogView(AjaxResponseMixin, CreateView):
 	template_name = 'blog/index.html'
 	model = Post
 	success_url = '/blog/'
