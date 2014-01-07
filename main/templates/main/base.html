@@ -39,9 +39,11 @@
 					</a>
 				</li>
 			</ul>
+			{% if user.is_authenticated %}
 			<p class="navbar-text navbar-right">
-				Signed in as {{ user.username|default:"Anonimous X" }}
+				Signed in as {{ user.username }} 
 			</p>
+			{% endif %}
 		</div>
 	</div>
 	<div class="row-fluid">

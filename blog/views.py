@@ -1,31 +1,26 @@
 # -*- coding: utf-8 -*- 
 
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from django.utils import timezone
-from django.views import generic
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView, CreateView
 
 from models import Post
 
-moment = timezone.now()
-
-class BlogView(generic.ListView):
+class BlogView(CreateView):
 	template_name = 'blog/index.html'
-	context_object_name = 'post_list'
+	model = Post
+	success_url = '/blog/'
+	fields = ['title', 'text']
 
-	def get_queryset(self):
+	def get_post_list(self):
 		return Post.objects.order_by('-date')[:10]
 
 	def get_context_data(self, **kwargs):
 		context = super(BlogView, self).get_context_data(**kwargs)
-		context['moment'] = moment
+		context['moment'] = timezone.now()
+		context['post_list'] = self.get_post_list()
 		return context
 
-class PostView(generic.DetailView):
+class PostView(DetailView):
 	model = Post
 	template_name = 'blog/post.html' 
-
-#	def get_context_data(self, **kwargs):
-#		context = super(BlogView, self).get_context_data(**kwargs)
-#		context['moment'] = moment
-#		return context
